@@ -1,0 +1,18 @@
+main:
+  restart: always
+  build: bot
+  links:
+    - database
+  volumes:
+    - ./bot/src:/work
+  working_dir: /work
+  environment:
+    - telegram_key=default
+    - weather_key=default
+
+database:
+  image: mongo
+  expose:
+    - "27017"
+  ports:
+    - "0.0.0.0:42253:27017"
